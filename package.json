@@ -1,0 +1,22 @@
+{
+  "name": "feed-reader-deploy-test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "deploy": "npm run db:migrations:apply && wrangler deploy",
+    "db:migrations:apply": "wrangler d1 migrations apply DB --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.164.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "DB": {
+        "description": "The D1 database that holds feeds and items. Accept the default name."
+      },
+      "PASSWORD": {
+        "description": "The password that protects your reader. Choose a long random string, for example the output of `openssl rand -hex 24`."
+      }
+    }
+  }
+}
